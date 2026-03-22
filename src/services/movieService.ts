@@ -11,7 +11,7 @@ export const fetchMovies = async (query: string): Promise<Movie[]> => {
     {
       params: { query },
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzODE1YmMzMmZiNTU5OGY3ODMxNmU0Mjc1MWU2ODJiZCIsIm5iZiI6MTc3NDE4OTA2OC44NzY5OTk5LCJzdWIiOiI2OWJmZmEwYzE5MWVmMzU4NzgxM2JlMGIiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.HDAXDQhK3efl-aMJW5WJk1P14eKK_dF5EQLZqdZTYak`,
+        Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
       },
     }
   );
