@@ -4,17 +4,22 @@ import type { Movie } from "../types/movie";
 interface TMDBResponse {
   results: Movie[];
 }
-
+// 
 export const fetchMovies = async (query: string): Promise<Movie[]> => {
-  const response = await axios.get<TMDBResponse>(
-    "https://image.tmdb.org/t/p/w500",
-    {
-      params: { query },
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
-      },
-    }
-  );
+  try {
+    const response = await axios.get<TMDBResponse>(
+      "https://api.themoviedb.org/3/search/movie",
+      {
+        params: { query },
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+        },
+      }
+    );
 
-  return response.data.results;
+    return response.data.results;
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+    throw error;
+  }
 };
