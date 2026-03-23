@@ -5,11 +5,11 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ onSubmit }: SearchBarProps) {
-  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (formData: FormData) => {
+    const query = formData.get("query") as string;
 
-    const form = event.currentTarget;
-    const query = (form.elements.namedItem("query") as HTMLInputElement).value;
+
+    
 
     if (!query.trim()) {
       alert("Please enter your search query.");
@@ -17,12 +17,12 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
     }
 
     onSubmit(query);
-    form.reset();
+    
   };
 
   return (
     <header className={css.header}>
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form className={css.form} action={handleSubmit}>
         <input name="query" />
         <button type="submit">Search</button>
       </form>
